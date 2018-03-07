@@ -43,6 +43,14 @@ gulp.task('js', function() {
     .pipe(gulp.dest('builds/development/js'))
 });
 
+/*
+  Compiles Sass to CSS
+  In the compass call we pass in an object which specifies our Sass preferences
+  sass parameter is where the Sass files are coming from
+  image parameter is where it should look for the images
+  style is the output style
+  See here for output styles: http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
+*/
 gulp.task('compass', function() {
   gulp.src(sassSources)
     .pipe(compass({
@@ -53,3 +61,5 @@ gulp.task('compass', function() {
     .on('error', gutil.log)
     .pipe(gulp.dest('builds/development/css'))
 });
+
+gulp.task('default', ['coffee', 'js', 'compass']);
