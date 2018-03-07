@@ -17,6 +17,8 @@ var jsSources = [
 
 // style includes all the files anyway so we don't need a bunch of files here
 var sassSources = ['components/sass/style.scss'];
+var htmlSources = ['builds/development/*.html'];
+var jsonSources = ['builds/development/js/*.json'];
 /*
   Notes:
   - When doing a gulp pipe you need to specify the original file location
@@ -70,6 +72,8 @@ gulp.task('watch', function() {
   gulp.watch(coffeeSources, ['coffee']);
   gulp.watch(jsSources, ['js']);
   gulp.watch('components/sass/*.scss', ['compass']);
+  gulp.watch(htmlSources, ['html']);
+  gulp.watch(jsonSources, ['json']);
 });
 
 /**
@@ -83,4 +87,18 @@ gulp.task('connect', function() {
   });
 });
 
-gulp.task('default', ['coffee', 'js', 'compass', 'connect', 'watch']);
+/**
+* Give it any files with html extension (see htmlSources)
+* pipe them to the reloading algorithm
+*/
+gulp.task('html', function() {
+  gulp.src(htmlSources)
+    .pipe(connect.reload())
+});
+
+gulp.task('json', function() {
+  gulp.src(jsonSources)
+    .pipe(connect.reload());
+});
+
+gulp.task('default', ['html', 'json', 'coffee', 'js', 'compass', 'connect', 'watch']);
