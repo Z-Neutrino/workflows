@@ -4,6 +4,9 @@ var gulp = require('gulp'),
     browserify = require('gulp-browserify'),
     compass = require('gulp-compass'),
     connect = require('gulp-connect'),
+    gulpif = require('gulp-if'),
+    babel = require('gulp-babel'),
+    uglify = require('gulp-uglify'),
     concat = require('gulp-concat');
 
 var env,
@@ -64,6 +67,10 @@ gulp.task('js', function() {
   gulp.src(jsSources)
     .pipe(concat('script.js'))
     .pipe(browserify())
+    .pipe(gulpif(env === 'production', babel({
+      presets: ['env']
+    })))
+    .pipe(gulpif(env === 'production', uglify()))
     .pipe(gulp.dest(outputDir + 'js'))
     .pipe(connect.reload())
 });
