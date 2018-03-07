@@ -20,6 +20,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-connect": "^5.5.0",
     "gulp-if": "^2.0.2",
+    "gulp-minify-html": "^1.0.6",
     "gulp-ruby-sass": "^3.0.0",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
@@ -28,6 +29,7 @@
   },
   "dependencies": {
     "uglify": "^0.1.5",
-    "uglify-js": "^3.3.13"
+    "uglify-js": "^3.3.13",
+    "uuid": "^3.2.1"
   }
 }
